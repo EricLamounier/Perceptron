@@ -93,7 +93,7 @@ document.getElementById('limpar').addEventListener('click', () => {
     limpaGrafico()
 })
 
-const testPerceptron = () => {
+document.getElementById('testar').addEventListener('click', () => {
     // Solicita a entrada de valores para teste
     const x1 = Number(document.getElementById('input_x1').value)
     const x2 = Number(document.getElementById('input_x2').value)
@@ -103,9 +103,10 @@ const testPerceptron = () => {
     const sum = x1 * w1 + x2 * w2 + bias
     const predicao = step(sum)
 
+    document.getElementById('resTeste').value = predicao
     //console.log(predicao)
     console.log('bias ' + bias)
-}
+})
 
 let and = [
     [0, 0, 0],
@@ -122,5 +123,5 @@ let or = [
 ]
 // Chamada da função para iniciar o treinamento
 document.getElementById('treinar').addEventListener('click', ()=>{
-    treinoPerceptron(or, w1, w2, 0.2, bias, 100)
+    treinoPerceptron(and, w1, w2, 0.2, bias, 100)
 })
