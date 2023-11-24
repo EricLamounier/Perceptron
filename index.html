@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Perceptron</title>
+</head>
+<body>
+    <button id="treinar">TREINAR</button>
+
+    <input type="number" id="input_x1" />
+    <input type="number" id="input_x2" />
+
+    <button id="testar">Testar</button>
+    
+    <h4>6963 - Eric Vinícius Lamounier Botelho</h4>
+    <button id="and">AND</button>
+    <button id="or">OR</button>
+    <button>NOT</button>
+    <button id="limpar">Zerar Dados</button>
+
+    <div id="perceptronDiv"class="box">
+        <img id="perceptron" src="perceptron.png" />
+        <p class="labelPerceptron" id="x1">x1 = <span id=x1Value>0</span></p>
+        <p class="labelPerceptron" id="x2">x2 = <span id=x2Value>0</span></p>
+        <p class="labelPerceptron" id="w1">w1 = <span id=w1Value>0</span></p>
+        <p class="labelPerceptron" id="w2">w2 = <span id=w2Value>0</span></p>
+        <p class="labelPerceptron" id="sum">&Sigma; = <span id=sumValue>0</span></p>
+        <p class="labelPerceptron" id="step">step(<span id="stepValue">0</span>)</p>
+        <p class="labelPerceptron" id="predicao">&ycirc; = <span id="predicaoValue">0</span></p>
+    </div>
+    
+    <p id="resultado">Resultado = <span id="resultadoValue">0</span></p>
+    <p id="acuracia">Acurácia = <span id="acuraciaValue">0</span>%</p>
+
+    <div id="grafico">
+        <canvas id="myChart" width="400" height="200"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script type="module" src="graph.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
