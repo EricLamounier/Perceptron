@@ -1,18 +1,75 @@
 body {
-    background-color: #1b1b1b;
-    color: #fff;
+    background-color: rgb(34, 34, 34);
+    color: #f8f8f8;
     font-family: arial;
+    font-size: 12px;
+    display: flex;
+    gap: 20px
 }
 
-#grafico {
-    width: 700px;
+.entradas {
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.463);
+    filter: drop-shadow(2px 2px 5px rgb(0, 0, 0));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px
+}
+
+.entradas fieldset {
+    width: 90%;
+}
+
+.treino {
+    min-width: 300px;
+    max-width: 300px;
+}
+
+.graph  {
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+}
+
+.graph > div {
+    display: flex;
+    align-items: center;
+    width: 500px;
+}
+
+.graph > div > table {
+    height: 50px;
+}
+
+.graph canvas {
+    --w: 440px;
+    min-width: var(--w);
+    min-height: calc(var(--w)/2);
+    max-width: var(--w);
+    max-height: calc(var(--w)/2);
+}
+
+#boxTeste {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px
+}
+
+#container {
+    display: flex ! important;
+    flex-direction: column;
+    gap: 5px
 }
 
 #perceptronDiv {
-    width: 450px;
+    min-width: 350px;
+    max-width: 300px;
     position: relative;
-    margin-bottom: 100px;
-    margin-top: 100px;
+    margin-bottom: 40px;
+    margin-top: 10px;
     margin-left: 50px;
     padding-right: 60px;
 }
@@ -21,6 +78,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    filter: drop-shadow(2px 2px 5px rgb(0, 0, 0))
 }
 
 .labelPerceptron {
@@ -39,25 +97,43 @@ body {
 
 #w1 {
     top: -10px;
-    left: 80px
+    left: 70px
 }
 
 #w2 {
     bottom: -10px;
-    left: 80px
+    left: 60px
 }
 
 #sum {
-    top: 85px;
-    left: 160px;
+    top: 70px;
+    left: 130px;
 }
 
 #step {
-    top: 85px;
-    left: 255px;
+    top: 60px;
+    left: 195px;
 }
 
 #predicao {
-    top: 80px;
-    left: 460px
+    top: 65px;
+    left: 355px
+}
+
+input:read-only {
+    background-color: rgb(224, 224, 224);
+}
+
+input[type="number"] {
+    width: 40px;
+}
+
+input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    
+}
+input[type=number] { 
+   -moz-appearance: textfield;
+   appearance: textfield;
+
 }

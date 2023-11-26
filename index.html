@@ -7,40 +7,141 @@
     <title>Perceptron</title>
 </head>
 <body>
-    <button id="treinar">TREINAR</button>
-
-    <input type="number" id="input_x1" />
-    <input type="number" id="input_x2" />
-    <button id="testar">Testar</button>
-    <input type="number" id="resTeste" readonly /> 
     
-    <h4>6963 - Eric Vinícius Lamounier Botelho</h4>
-    <button id="and">AND</button>
-    <button id="or">OR</button>
-    <button>NOT</button>
-    <button id="limpar">Zerar Dados</button>
-
-    <div id="perceptronDiv"class="box">
-        <img id="perceptron" src="perceptron.png" />
-        <p class="labelPerceptron" id="x1">x1 = <span id=x1Value>0</span></p>
-        <p class="labelPerceptron" id="x2">x2 = <span id=x2Value>0</span></p>
-        <p class="labelPerceptron" id="w1">w1 = <span id=w1Value>0</span></p>
-        <p class="labelPerceptron" id="w2">w2 = <span id=w2Value>0</span></p>
-        <p class="labelPerceptron" id="sum">&Sigma; = <span id=sumValue>0</span></p>
-        <p class="labelPerceptron" id="step">step(<span id="stepValue">0</span>)</p>
-        <p class="labelPerceptron" id="predicao">&ycirc; = <span id="predicaoValue">0</span></p>
+    <div class="graph">
+        <div>
+            <canvas id="graphAND"></canvas>
+            <table border="1">
+                <tr>
+                    <td>W1</td>
+                    <td id="w1AND"></td>
+                </tr>
+                <tr>
+                    <td>W2</td>
+                    <td id="w2AND"></td>
+                </tr>
+                <tr>
+                    <td>Bias</td>
+                    <td  id="biasAND"></td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <canvas id="graphOR"></canvas>
+            <table border="1">
+                <tr>
+                    <td>W1</td>
+                    <td id="w1OR"></td>
+                </tr>
+                <tr>
+                    <td>W2</td>
+                    <td id="w2OR"></td>
+                </tr>
+                <tr>
+                    <td>Bias</td>
+                    <td id="biasOR"></td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <canvas id="graphNOT"></canvas> 
+            <table border="1">
+                <tr>
+                    <td>W1</td>
+                    <td id="w1NOT"></td>
+                </tr>
+                <tr>
+                    <td>Bias</td>
+                    <td id="biasNOT"></td>
+                </tr>
+            </table>
+        </div>
     </div>
     
-    <p id="resultado">Resultado = <span id="resultadoValue">0</span></p>
-    <p id="acuracia">Acurácia = <span id="acuraciaValue">0</span>%</p>
+    <div class="entradas treino">
+        <fieldset id="boxTreino">
+            <legend>Opção</legend>
+            <input type="radio" id="operador_and" name="operadores" value="0" data-i="AND" checked/>
+            <label for="operador_and">AND</label>
 
-    <div id="grafico">
-        <canvas id="myChart" width="400" height="200"></canvas>
+            <input type="radio" id="operador_or" name="operadores" value="1" data-i="OR" />
+            <label for="operador_or">OR</label>
+
+            <input type="radio" id="operador_not" name="operadores" value="2" data-i="NOT" />
+            <label for="operador_not">NOT</label>
+
+            <input type="radio" id="operador_nand" name="operadores" value="3" data-i="NAND" />
+            <label for="operador_nand">NAND</label>
+
+            <input type="radio" id="operador_nor" name="operadores" value="4" data-i="NOR" />
+            <label for="operador_nor">NOR</label>
+        </fieldset>
+
+        <fieldset id="boxPesos">
+            <legend>Pesos</legend>
+            <label for="input_w1">Peso Inicial 1: </label>
+            <input type="number" id="input_w1" placeholder="w1" value="-0.1"/></br>
+
+            <label for="input_w2">Peso Inicial 2: </label>
+            <input type="number" id="input_w2" placeholder="w2" value="0"/>
+        </fieldset>
+
+        <fieldset id="boxParametros">
+            <legend>Parâmetros</legend>
+            <label for="input_epocas">Qntd. Máxima de Épocas: </label>
+            <input type="number" id="input_epocas" placeholder="qntd. máxima epocas" value="100" /></br>
+
+            <label for="input_taxa_aprendizado">Taxa de Aprendizagem Inicial: </label>
+            <input type="number" id="input_taxa_aprendizado" placeholder="taxa aprendizado" value="0.02"/></br>
+            
+            <label for="input_bias">Bias Inicial: </label>
+            <input type="number" id="input_bias" placeholder="bias" value="-0.009"/>    
+        </fieldset>
+
+        <fieldset id="boxFuncaoAtivacao">
+            <legend>Função Ativação</legend>
+            <input type="radio" id="linear" name="funcaoAtivacao" value="0" checked/>
+            <label for="linear">Linear</label>
+
+            <input type="radio" id="nao_linear" name="funcaoAtivacao" value="1" />
+            <label for="nao_linear">Não Linear</label>
+        </fieldset>
+
+        <fieldset id="boxObervacao">
+            <legend>Obervações</legend>
+                <li>Campos vazios serão tratados como aleatórios.</li>
+        </fieldset>
+
+        <button id="treinar">Treinamento TODOS</button>
+
+        <fieldset id="boxTeste">
+            <legend>Testar</legend>
+            <div style="display: flex; justify-content: space-around; gap: 10px">
+                <div>
+                    <label>Entrada 1: </label>
+                    <input type="number" id="input_x1" placeholder="x1" />
+                </div>
+
+                <div>
+                    <label>Entrada 2: </label>
+                    <input type="number" id="input_x2" placeholder="x2" />
+                </div>
+            </div>
+
+            <button id="testar" style="max-width: 150px; align-self: center;">Testar com <span id="testeOpcao">AND</span></button>
+            <button id="limpar">Limpar</button>
+            <div>
+                <label>Resultado:</label>
+                <input type="number" id="resTeste" readonly /> 
+            </div>
+
+        </fieldset>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script type="module" src="graph.js"></script>
+    <script type="module" src="graphAND.js"></script>
+    <script type="module" src="graphOR.js"></script>
+    <script type="module" src="graphNOT.js"></script>
     <script type="module" src="script.js"></script>
 </body>
 </html>
