@@ -1,6 +1,6 @@
-import { adicionaDadosAND, limpaGraficoAND } from './graphAND.js';
-import { adicionaDadosOR, limpaGraficoOR } from './graphOR.js';
-import { adicionaDadosNOT, limpaGraficoNOT } from './graphNOT.js';
+import { adicionaDadosAND, limpaGraficoAND } from '../graficos/graphAND.js';
+import { adicionaDadosOR, limpaGraficoOR } from '../graficos/graphOR.js';
+import { adicionaDadosNOT, limpaGraficoNOT } from '../graficos/graphNOT.js';
 
 const resultadoTreinamentoAND = { w1: 0, w2: 0, bias: 0 };
 

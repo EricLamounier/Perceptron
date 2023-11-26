@@ -7,7 +7,7 @@ Pequeno exercício para a aula de SIN323 - Inteligência Artificial ministrada n
 </div>
 
 ## Para o professor:
-- O código do perceptron se encontra neste repositório no arquivo <i><u>[script.js](https://github.com/EricLamounier/Perceptron/blob/main/script.js)</u></i>.
+- O código do perceptron se encontra neste repositório no arquivo <i><u>[script.js](https://github.com/EricLamounier/Perceptron/blob/main/perceptron/script.js)</u></i>.
 
 ## Para acessar o site, basta clicar no link abaixo:
 [Clique aqui para acessar a página](https://ericlamounier.github.io/Perceptron/)
