@@ -8,6 +8,9 @@ const resultadoTreinamentoOR = { w1: 0, w2: 0, bias: 0 };
 
 const resultadoTreinamentoNOT = { w1: 0, bias: 0 };
 
+const sleep = (milliseconds) => (new Promise(resolve => setTimeout(resolve, milliseconds)))
+
+
 const ativacaoLinear = (valor) => (valor < 0 ? 0 : 1);
 
 const ativacaoSigmoide = (valor) => (1 / (1 + Math.exp(-valor)) >= 0.5 ? 1 : 0);
@@ -44,7 +47,7 @@ const salvaDados = (w1, w2, bias, operador) => {
   }
 }
 
-const treinoPerceptron = (dados, w1, w2, bias, taxa_aprendizado, epocas, operador) => {
+const treinoPerceptron = async (dados, w1, w2, bias, taxa_aprendizado, epocas, operador) => {
   let check = 0
   const opcaoAtivacao = Number(document.querySelector('input[name="funcaoAtivacao"]:checked').value);
   
@@ -68,6 +71,8 @@ const treinoPerceptron = (dados, w1, w2, bias, taxa_aprendizado, epocas, operado
     if (acertos ===  dados.length) check++;
 
     adicionaDados(operador,acertos,check);
+
+    await sleep(100)
 
     if (check === 15 || check === epocas) {
       salvaDados(w1, w2, bias, operador)

@@ -51,7 +51,6 @@ let graphAND = new Chart(ctx, {
         }
       },
       y: {
-        beginAtZero: true,
         type: 'linear',
         title: {
           display: true,
