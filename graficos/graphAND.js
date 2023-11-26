@@ -77,7 +77,7 @@ let graphAND = new Chart(ctx, {
 });
 
 // Função para adicionar dados ao gráfico
-export const adicionaDadosAND = (valor) => {
+export const adicionaDadosGraficoAND = (valor) => {
   // Adicione um novo ponto ao gráfico
   chartData.labels.push(count++);
   chartData.datasets[0].data.push(valor);

@@ -85,7 +85,7 @@ export const limpaGraficoNOT = () => {
   graphNOT.update();
 }
 
-export const adicionaDadosNOT = (valor) => {
+export const adicionaDadosGraficoNOT = (valor) => {
   // Adicione um novo ponto ao gráfico
   chartDataNOT.labels.push(countNOT++);
   chartDataNOT.datasets[0].data.push(valor);

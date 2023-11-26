@@ -1,6 +1,6 @@
-import { adicionaDadosAND, limpaGraficoAND } from '../graficos/graphAND.js';
-import { adicionaDadosOR, limpaGraficoOR } from '../graficos/graphOR.js';
-import { adicionaDadosNOT, limpaGraficoNOT } from '../graficos/graphNOT.js';
+import { adicionaDadosGraficoAND, limpaGraficoAND } from '../graficos/graphAND.js';
+import { adicionaDadosGraficoOR, limpaGraficoOR } from '../graficos/graphOR.js';
+import { adicionaDadosGraficoNOT, limpaGraficoNOT } from '../graficos/graphNOT.js';
 
 const resultadoTreinamentoAND = { w1: 0, w2: 0, bias: 0 };
 
@@ -10,18 +10,30 @@ const resultadoTreinamentoNOT = { w1: 0, bias: 0 };
 
 const sleep = (milliseconds) => (new Promise(resolve => setTimeout(resolve, milliseconds)))
 
+const elementos = {
+  w1AND: document.getElementById('w1AND'),
+  w2AND: document.getElementById('w2AND'),
+  biasAND: document.getElementById('biasAND'),
+
+  w1OR: document.getElementById('w1OR'),
+  w2OR: document.getElementById('w2OR'),
+  biasOR: document.getElementById('biasOR'),
+
+  w1NOT: document.getElementById('w1NOT'),
+  biasNOT: document.getElementById('biasNOT'),
+}
 
 const ativacaoLinear = (valor) => (valor < 0 ? 0 : 1);
 
 const ativacaoSigmoide = (valor) => (1 / (1 + Math.exp(-valor)) >= 0.5 ? 1 : 0);
 
-const adicionaDados = (operador, acertos) => {
+const adicionaDadosGrafico = (operador, acertos) => {
   switch(Number(operador)) {
-    case 0: adicionaDadosAND(acertos); break;
+    case 0: adicionaDadosGraficoAND(acertos); break;
 
-    case 1: adicionaDadosOR(acertos); break;
+    case 1: adicionaDadosGraficoOR(acertos); break;
 
-    case 2: adicionaDadosNOT(acertos); break;
+    case 2: adicionaDadosGraficoNOT(acertos); break;
   }
 };
 
@@ -47,6 +59,29 @@ const salvaDados = (w1, w2, bias, operador) => {
   }
 }
 
+const atualizaInformacoes = (w1,w2,bias,operador) => {
+  switch(operador) {
+    case 0: // AND
+      elementos.w1AND.innerHTML = w1
+      elementos.w2AND.innerHTML = w2
+      elementos.biasAND.innerHTML = bias
+      break
+
+    case 1: // OR
+      elementos.w1OR.innerHTML = w1
+      elementos.w2OR.innerHTML = w2
+      elementos.biasOR.innerHTML = bias
+      break
+    case 2: // NOT
+      elementos.w1NOT.innerHTML = w1
+      elementos.biasNOT.innerHTML = bias
+      break
+    case 3: // NAND
+      
+      break
+  }
+}
+
 const treinoPerceptron = async (dados, w1, w2, bias, taxa_aprendizado, epocas, operador) => {
   let check = 0
   const opcaoAtivacao = Number(document.querySelector('input[name="funcaoAtivacao"]:checked').value);
@@ -66,11 +101,13 @@ const treinoPerceptron = async (dados, w1, w2, bias, taxa_aprendizado, epocas, o
       bias += taxa_aprendizado * erro;
 
       if (predicao !== target) acertos--;
+
+      atualizaInformacoes(w1.toFixed(2), w2.toFixed(2), bias.toFixed(2) ,operador)
     }
 
     if (acertos ===  dados.length) check++;
 
-    adicionaDados(operador,acertos,check);
+    adicionaDadosGrafico(operador,acertos,check);
 
     await sleep(100)
 
@@ -98,25 +135,9 @@ const iniciarTreinamento = async () => {
   const or = [[0, 0, 0], [0, 1, 1], [1, 0, 1], [1, 1, 1]];
   const not = [[0, 0, 1], [1, 0, 0]];
 
-  const funcoesTreino = [
-    () => treinoPerceptron(and, w1, w2, bias, taxa_aprendizado, epocas, 0),
-    () => treinoPerceptron(or, w1, w2, bias, taxa_aprendizado, epocas, 1),
-    () => treinoPerceptron(not, w1, 0, bias, taxa_aprendizado, epocas, 2)
-  ];
-
-  await Promise.all(funcoesTreino.map(funcaoTreino => funcaoTreino()));
-
-  document.getElementById('w1AND').innerHTML = (resultadoTreinamentoAND.w1).toFixed(2)
-  document.getElementById('w2AND').innerHTML = (resultadoTreinamentoAND.w1).toFixed(2)
-  document.getElementById('biasAND').innerHTML = (resultadoTreinamentoAND.bias).toFixed(2)
-
-  document.getElementById('w1OR').innerHTML = (resultadoTreinamentoOR.w1).toFixed(2)
-  document.getElementById('w2OR').innerHTML = (resultadoTreinamentoOR.w2).toFixed(2)
-  document.getElementById('biasOR').innerHTML = (resultadoTreinamentoOR.bias).toFixed(2)
-
-  document.getElementById('w1NOT').innerHTML = (resultadoTreinamentoNOT.w1).toFixed(2)
-  document.getElementById('biasNOT').innerHTML = (resultadoTreinamentoOR.bias).toFixed(2)
-
+  treinoPerceptron(and, w1, w2, bias, taxa_aprendizado, epocas, 0),
+  treinoPerceptron(or, w1, w2, bias, taxa_aprendizado, epocas, 1),
+  treinoPerceptron(not, w1, 0, bias, taxa_aprendizado, epocas, 2)
 }
 
 const iniciarLimpeza = () => {

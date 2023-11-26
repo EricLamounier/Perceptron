@@ -85,7 +85,7 @@ export const limpaGraficoOR = () => {
   graphOR.update();
 }
 
-export const adicionaDadosOR = (valor) => {
+export const adicionaDadosGraficoOR = (valor) => {
   // Adicione um novo ponto ao gráfico
   chartDataOR.labels.push(countOR++);
   chartDataOR.datasets[0].data.push(valor);
